@@ -97,7 +97,7 @@ def print_round_constants_arkff(round_constants):
     print("Round constants for ark-ff:")
     print("vec![" + ",".join(['Fp(field_new!(Fr, "{}"))'.format(int(entry)) for entry in round_constants]) + "]")
 
-def create_mds_p(n, t):
+def create_mds_p(t):
     M = matrix(F, t, t)
 
     # Sample random distinct indices and assign to xs and ys
@@ -244,12 +244,12 @@ def generate_matrix(FIELD, FIELD_SIZE, NUM_CELLS):
         print("Matrix generation not implemented for GF(2^n).")
         exit(1)
     elif FIELD == 1:
-        mds_matrix = create_mds_p(FIELD_SIZE, NUM_CELLS)
+        mds_matrix = create_mds_p(NUM_CELLS)
         result_1 = algorithm_1(mds_matrix, NUM_CELLS)
         result_2 = algorithm_2(mds_matrix, NUM_CELLS)
         result_3 = algorithm_3(mds_matrix, NUM_CELLS)
         while result_1[0] == False or result_2[0] == False or result_3[0] == False:
-            mds_matrix = create_mds_p(FIELD_SIZE, NUM_CELLS)
+            mds_matrix = create_mds_p(NUM_CELLS)
             result_1 = algorithm_1(mds_matrix, NUM_CELLS)
             result_2 = algorithm_2(mds_matrix, NUM_CELLS)
             result_3 = algorithm_3(mds_matrix, NUM_CELLS)
